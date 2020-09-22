@@ -51,10 +51,10 @@ class App extends React.Component {
   render() {
     return (
       <Wrapper>
-        <Title>Employee List</Title>
         <Buttons
           sortLastName={this.sortLastName}
         />
+        <Title>Employee List</Title>
         <EmployeeCard
           results={this.state.results}
         />

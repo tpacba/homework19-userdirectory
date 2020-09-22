@@ -4,26 +4,30 @@ import "./style.css";
 function EmployeeCard({results}) {
   console.log(results);
   return (
-    <div className="card-columns">
+    <div>
       {results.map(item => (
-        <div className="card" key={item.id.value}>
-          <div className="img-container">
+        <div className="card mb-3" key={item.id.value}>
+          <div className="row no-gutters">
+            <div className="col-md-4 img-container">
               <img alt={item.name.last} src={item.picture.large} />
             </div>
-            <div className="content">
-              <ul>
-                <li>
-                  <strong>Name:</strong> {item.name.first} {item.name.last}
-                </li>
-                <li>
-                  <strong>Phone:</strong> {item.phone}
-                </li>
-                <li>
-                  <strong>City:</strong> {item.location.city}, {item.location.state}
-                </li>
-              </ul>
+            <div className="col-md-8">
+              <div className="card-body content">
+                <ul>
+                  <li>
+                    <strong>Name:</strong> {item.name.first} {item.name.last}
+                  </li>
+                  <li>
+                    <strong>Phone:</strong> {item.phone}
+                  </li>
+                  <li>
+                    <strong>City:</strong> {item.location.city}, {item.location.state}
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
+        </div>
       ))}
     </div>
   );
