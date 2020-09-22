@@ -1,33 +1,36 @@
 import React from 'react';
-import FriendCard from './components/FriendCard';
+import EmployeeCard from './components/EmployeeCard';
 import Wrapper from './components/Wrapper';
 import Title from './components/Title';
-import friends from './friends.json';
+import API from "./utils/API";
 
-function App() {
-  return (
-    <Wrapper>
-      <Title>Friends List</Title>
-      <FriendCard
-        name={friends[0].name}
-        image={friends[0].image}
-        occupation={friends[0].occupation}
-        location={friends[0].location}
-      />
-      <FriendCard
-        name={friends[1].name}
-        image={friends[1].image}
-        occupation={friends[1].occupation}
-        location={friends[1].location}
-      />
-      <FriendCard
-        name={friends[2].name}
-        image={friends[2].image}
-        occupation={friends[2].occupation}
-        location={friends[2].location}
-      />
-    </Wrapper>
-  );
+class App extends React.Component {
+  state = {
+    results: []
+  };
+
+  componentDidMount() {
+    API.results()
+      .then(response => {
+        this.setState({
+          results: response.data.results
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
+  }
+
+  render() {
+    return (
+      <Wrapper>
+        <Title>Employee List</Title>
+        <EmployeeCard
+          results={this.state.results}
+        />
+      </Wrapper>
+    );
+  }
 }
 
 export default App;
