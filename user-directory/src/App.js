@@ -2,6 +2,7 @@ import React from 'react';
 import EmployeeCard from './components/EmployeeCard';
 import Wrapper from './components/Wrapper';
 import Title from './components/Title';
+import Buttons from './components/Buttons'
 import API from "./utils/API";
 
 class App extends React.Component {
@@ -32,13 +33,28 @@ class App extends React.Component {
       })
   }
 
+  sortLastName = {
+    forward: () => {
+      const forwardResults = this.state.results.sort(this.compare_last);
+      this.setState({
+        results: forwardResults
+      })
+    },
+    reverse: () => {
+      const reverseResults = this.state.results.sort(this.compare_last).reverse();
+      this.setState({
+        results: reverseResults
+      })
+    }
+  }
+
   render() {
     return (
       <Wrapper>
         <Title>Employee List</Title>
-        {/* <Buttons
+        <Buttons
           sortLastName={this.sortLastName}
-        /> */}
+        />
         <EmployeeCard
           results={this.state.results}
         />
