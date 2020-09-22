@@ -9,11 +9,22 @@ class App extends React.Component {
     results: []
   };
 
+  compare_last = (a, b) => {
+    if (a.name.last < b.name.last) {
+      return -1;
+    } else if (a.name.last > b.name.last) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
   componentDidMount() {
     API.results()
       .then(response => {
+        const results = response.data.results.sort(this.compare_last)
         this.setState({
-          results: response.data.results
+          results: results
         })
       })
       .catch(err => {
@@ -25,6 +36,9 @@ class App extends React.Component {
     return (
       <Wrapper>
         <Title>Employee List</Title>
+        {/* <Buttons
+          sortLastName={this.sortLastName}
+        /> */}
         <EmployeeCard
           results={this.state.results}
         />
