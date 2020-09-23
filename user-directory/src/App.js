@@ -1,4 +1,5 @@
 import React from 'react';
+import Search from './components/Search';
 import EmployeeCard from './components/EmployeeCard';
 import Wrapper from './components/Wrapper';
 import Title from './components/Title';
@@ -50,15 +51,32 @@ class App extends React.Component {
     }
   }
 
-  filterByState = () => {
-    let chosen = document.getElementById("inputState").value;
-    const filterResults = this.state.results.filter(item => item.location.state === chosen);
+  filterByState = (event) => {
+    let search = event.target.value;
+    const filterResults = this.state.results.filter(item => item.location.state === search);
     if (filterResults.length === 0) {
       alert("No matches!");
     }
     this.setState({
       filterResults: filterResults
     })
+  }
+
+  searchByName = (event) => {
+    event.preventDefault();
+    let search = event.target.value.toLowerCase();
+    if (search.length > 0) {
+      const filterResults = this.state.results.filter(item => {
+        const fullName = (item.name.first + item.name.last).toLowerCase();
+        return RegExp(`${search}*`).test(fullName)
+      })
+      if (filterResults.length === 0) {
+        alert("No matches!");
+      }
+      this.setState({
+        filterResults: filterResults
+      })
+    }
   }
 
   render() {
@@ -80,6 +98,8 @@ class App extends React.Component {
         />
         <Dropdown 
         filterByState={this.filterByState}/>
+        <Search 
+        searchByName={this.searchByName}/>
         <Title>Employee List</Title>
         {card}
       </Wrapper>
