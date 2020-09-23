@@ -2,12 +2,14 @@ import React from 'react';
 import EmployeeCard from './components/EmployeeCard';
 import Wrapper from './components/Wrapper';
 import Title from './components/Title';
-import Buttons from './components/Buttons'
+import Buttons from './components/Buttons';
+import Dropdown from './components/Dropdown'
 import API from "./utils/API";
 
 class App extends React.Component {
   state = {
-    results: []
+    results: [],
+    filterResults: []
   };
 
   compare_last = (a, b) => {
@@ -48,16 +50,38 @@ class App extends React.Component {
     }
   }
 
+  filterByState = () => {
+    let chosen = document.getElementById("inputState").value;
+    const filterResults = this.state.results.filter(item => item.location.state === chosen);
+    if (filterResults.length === 0) {
+      alert("No matches!");
+    }
+    this.setState({
+      filterResults: filterResults
+    })
+  }
+
   render() {
+    let card;
+    if (this.state.filterResults.length > 0) {
+      card = <EmployeeCard
+      results={this.state.filterResults}
+      />
+    } else {
+      card = <EmployeeCard
+      results={this.state.results}
+      />
+    }
+
     return (
       <Wrapper>
         <Buttons
           sortLastName={this.sortLastName}
         />
+        <Dropdown 
+        filterByState={this.filterByState}/>
         <Title>Employee List</Title>
-        <EmployeeCard
-          results={this.state.results}
-        />
+        {card}
       </Wrapper>
     );
   }

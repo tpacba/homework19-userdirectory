@@ -22,6 +22,8 @@ The user should be able to:
 
   * Filter the users by at least one property.
 
+  * Search the users name
+
 ## Commit Early and Often
 
 One of the most important skills to master as a web developer is version control. Building the habit of committing via Git is important for two reasons:

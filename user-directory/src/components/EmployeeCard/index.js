@@ -4,7 +4,7 @@ import "./style.css";
 function EmployeeCard({results}) {
   console.log(results);
   return (
-    <div>
+    <div className="container">
       {results.map(item => (
         <div className="card mb-3" key={item.id.value}>
           <div className="row no-gutters">
