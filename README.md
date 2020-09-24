@@ -1,6 +1,11 @@
 # User Directory
 
 ![license](https://img.shields.io/badge/license-ISC-red.svg)
+![axios](https://img.shields.io/badge/axios-0.20.0-blue.svg)
+![license](https://img.shields.io/badge/bootstrap-4.5.2-green.svg)
+![license](https://img.shields.io/badge/githubpages-3.1.0-yellow.svg)
+![license](https://img.shields.io/badge/react-16.13.1-purple.svg)
+
 
 ## Description
 
