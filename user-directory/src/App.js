@@ -67,7 +67,7 @@ class App extends React.Component {
     let search = event.target.value.toLowerCase();
     if (search.length > 0) {
       const filterResults = this.state.results.filter(item => {
-        const fullName = (item.name.first + item.name.last).toLowerCase();
+        const fullName = (item.name.first + " " + item.name.last).toLowerCase();
         return RegExp(`${search}*`).test(fullName)
       })
       if (filterResults.length === 0) {
@@ -93,6 +93,7 @@ class App extends React.Component {
 
     return (
       <Wrapper>
+        <Title>Employee List</Title>
         <Buttons
           sortLastName={this.sortLastName}
         />
@@ -100,7 +101,6 @@ class App extends React.Component {
         filterByState={this.filterByState}/>
         <Search 
         searchByName={this.searchByName}/>
-        <Title>Employee List</Title>
         {card}
       </Wrapper>
     );
