@@ -35,14 +35,18 @@ class App extends React.Component {
   sortLastName = {
     forward: () => {
       const forwardResults = this.state.results.sort(compare_last);
+      const forwardFilterResults = this.state.filterResults.sort(compare_last);
       this.setState({
-        results: forwardResults
+        results: forwardResults,
+        filterResults: forwardFilterResults
       })
     },
     reverse: () => {
       const reverseResults = this.state.results.sort(compare_last).reverse();
+      const reverseFilterResults = this.state.filterResults.sort(compare_last).reverse();
       this.setState({
-        results: reverseResults
+        results: reverseResults,
+        filterResults: reverseFilterResults
       })
     }
   }
