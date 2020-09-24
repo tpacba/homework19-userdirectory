@@ -7,10 +7,10 @@ function EmployeeCard({results}) {
       {results.map(item => (
         <div className="card mb-3" key={item.id.value}>
           <div className="row no-gutters">
-            <div className="col-md-4 img-container">
+            <div className="col-md-2 img-container">
               <img alt={item.name.last} src={item.picture.large} />
             </div>
-            <div className="col-md-8">
+            <div className="col-md-10">
               <div className="card-body content">
                 <ul>
                   <li>
