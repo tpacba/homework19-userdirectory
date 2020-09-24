@@ -97,7 +97,7 @@ class App extends React.Component {
 
     return (
       <Wrapper>
-        <Title>Employee List</Title>
+        <Title>User Directory</Title>
         <Buttons
           sortLastName={this.sortLastName}
         />
