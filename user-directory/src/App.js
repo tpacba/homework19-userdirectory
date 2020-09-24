@@ -8,25 +8,21 @@ import Dropdown from './components/Dropdown'
 import API from "./utils/API";
 
 class App extends React.Component {
+
+  // Create two states "results" (to show all results) and "filterResults" (to show filtered results)
+  // The two states are used later for conditional rendering
   state = {
     results: [],
     filterResults: []
   };
 
-  compare_last = (a, b) => {
-    if (a.name.last < b.name.last) {
-      return -1;
-    } else if (a.name.last > b.name.last) {
-      return 1;
-    } else {
-      return 0;
-    }
-  }
-
   componentDidMount() {
     API.results()
       .then(response => {
-        const results = response.data.results.sort(this.compare_last)
+
+        // Sort the results according to last name initially and save to state.result
+        // Scroll to bottom to see function "compare_last"
+        const results = response.data.results.sort(compare_last)
         this.setState({
           results: results
         })
@@ -38,13 +34,13 @@ class App extends React.Component {
 
   sortLastName = {
     forward: () => {
-      const forwardResults = this.state.results.sort(this.compare_last);
+      const forwardResults = this.state.results.sort(compare_last);
       this.setState({
         results: forwardResults
       })
     },
     reverse: () => {
-      const reverseResults = this.state.results.sort(this.compare_last).reverse();
+      const reverseResults = this.state.results.sort(compare_last).reverse();
       this.setState({
         results: reverseResults
       })
@@ -52,11 +48,14 @@ class App extends React.Component {
   }
 
   filterByState = (event) => {
-    let search = event.target.value;
-    const filterResults = this.state.results.filter(item => item.location.state === search);
+    event.preventDefault();
+
+    // Filter by state by matching the state of each result to input value, then set filtered results to state.filterResults
+    // See ./Dropdown/index.js how dropwdown input value works
+    const filterResults = this.state.results.filter(item => item.location.state === event.target.value);
     if (filterResults.length === 0) {
       alert("No matches!");
-    }
+    }  
     this.setState({
       filterResults: filterResults
     })
@@ -65,6 +64,9 @@ class App extends React.Component {
   searchByName = (event) => {
     event.preventDefault();
     let search = event.target.value.toLowerCase();
+
+    // When user begins typing a name, filter through the state.results array
+    // Use regular expression to test if what user is inputting is within the fullName string
     if (search.length > 0) {
       const filterResults = this.state.results.filter(item => {
         const fullName = (item.name.first + " " + item.name.last).toLowerCase();
@@ -80,6 +82,8 @@ class App extends React.Component {
   }
 
   render() {
+
+    // Conditional rendering whether to display results or filterResults
     let card;
     if (this.state.filterResults.length > 0) {
       card = <EmployeeCard
@@ -108,3 +112,15 @@ class App extends React.Component {
 }
 
 export default App;
+
+// Used for sort function to compare each item and return 0, -1, 1 which determines if it's placed ahead or behind within the array
+// Check out https://www.educative.io/edpresso/how-to-sort-an-array-of-objects-in-javascript for more info
+function compare_last(a, b) {
+  if (a.name.last < b.name.last) {
+    return -1;
+  } else if (a.name.last > b.name.last) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
