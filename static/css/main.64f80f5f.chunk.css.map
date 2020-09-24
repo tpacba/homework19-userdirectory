@@ -1,0 +1,1 @@
+{"version":3,"sources":["style.css"],"names":[],"mappings":"AAAA,SACE,gBAAiB,CACjB,kBAAmB,CACnB,WACF,CAEA,WACE,eACF,CAEA,MACE,iBACF","file":"main.64f80f5f.chunk.css","sourcesContent":[".wrapper {\n  padding-top: 20px;\n  background: #ECEFF1;\n  height: 100%;\n}\n\n.container {\n  margin: 0px 0px 10px\n}\n\n#logo {\n  margin: 0px 10px 0px 0px\n}"]}
